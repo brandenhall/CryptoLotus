@@ -1,0 +1,254 @@
+2013-04-08 15:22:02-0400 [-] Log opened.
+2013-04-08 15:22:02-0400 [-] twistd 12.0.0 (/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python 2.7.2) starting up.
+2013-04-08 15:22:02-0400 [-] reactor class: twisted.internet.selectreactor.SelectReactor.
+2013-04-08 15:22:02-0400 [-] Traceback (most recent call last):
+2013-04-08 15:22:02-0400 [-]   File "/usr/bin/twistd", line 14, in <module>
+2013-04-08 15:22:02-0400 [-]     run()
+2013-04-08 15:22:02-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/twistd.py", line 27, in run
+2013-04-08 15:22:02-0400 [-]     app.run(runApp, ServerOptions)
+2013-04-08 15:22:02-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/application/app.py", line 652, in run
+2013-04-08 15:22:02-0400 [-]     runApp(config)
+2013-04-08 15:22:02-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/twistd.py", line 23, in runApp
+2013-04-08 15:22:02-0400 [-]     _SomeApplicationRunner(config).run()
+2013-04-08 15:22:02-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/application/app.py", line 390, in run
+2013-04-08 15:22:02-0400 [-]     self.postApplication()
+2013-04-08 15:22:02-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/_twistd_unix.py", line 208, in postApplication
+2013-04-08 15:22:02-0400 [-]     self.startApplication(self.application)
+2013-04-08 15:22:02-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/_twistd_unix.py", line 315, in startApplication
+2013-04-08 15:22:02-0400 [-]     self.config['pidfile'])
+2013-04-08 15:22:02-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/_twistd_unix.py", line 270, in setupEnvironment
+2013-04-08 15:22:02-0400 [-]     f = open(pidfile,'wb')
+2013-04-08 15:22:02-0400 [-] IOError: [Errno 13] Permission denied: '/cryptolotus.pid'
+2013-04-08 15:22:32-0400 [-] Log opened.
+2013-04-08 15:22:32-0400 [-] twistd 12.0.0 (/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python 2.7.2) starting up.
+2013-04-08 15:22:32-0400 [-] reactor class: twisted.internet.selectreactor.SelectReactor.
+2013-04-08 15:22:32-0400 [-] Traceback (most recent call last):
+2013-04-08 15:22:32-0400 [-]   File "/usr/bin/twistd", line 14, in <module>
+2013-04-08 15:22:32-0400 [-]     run()
+2013-04-08 15:22:32-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/twistd.py", line 27, in run
+2013-04-08 15:22:32-0400 [-]     app.run(runApp, ServerOptions)
+2013-04-08 15:22:32-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/application/app.py", line 652, in run
+2013-04-08 15:22:32-0400 [-]     runApp(config)
+2013-04-08 15:22:32-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/twistd.py", line 23, in runApp
+2013-04-08 15:22:32-0400 [-]     _SomeApplicationRunner(config).run()
+2013-04-08 15:22:32-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/application/app.py", line 390, in run
+2013-04-08 15:22:32-0400 [-]     self.postApplication()
+2013-04-08 15:22:32-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/_twistd_unix.py", line 208, in postApplication
+2013-04-08 15:22:32-0400 [-]     self.startApplication(self.application)
+2013-04-08 15:22:32-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/_twistd_unix.py", line 315, in startApplication
+2013-04-08 15:22:32-0400 [-]     self.config['pidfile'])
+2013-04-08 15:22:32-0400 [-]   File "/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/scripts/_twistd_unix.py", line 270, in setupEnvironment
+2013-04-08 15:22:32-0400 [-]     f = open(pidfile,'wb')
+2013-04-08 15:22:32-0400 [-] IOError: [Errno 13] Permission denied: '/cryptolotus.pid'
+2013-04-08 15:33:00-0400 [-] Log opened.
+2013-04-08 15:33:00-0400 [-] twistd 12.0.0 (/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python 2.7.2) starting up.
+2013-04-08 15:33:00-0400 [-] reactor class: twisted.internet.selectreactor.SelectReactor.
+2013-04-08 15:36:53-0400 [-] Received SIGTERM, shutting down.
+2013-04-08 15:36:53-0400 [-] Main loop terminated.
+2013-04-08 15:36:53-0400 [-] Server Shut Down.
+2013-04-08 15:48:12-0400 [-] Log opened.
+2013-04-08 15:48:12-0400 [-] twistd 13.0.0 (/Users/bhall/Documents/Lab/CryptoLotus/dev/env/bin/python 2.7.2) starting up.
+2013-04-08 15:48:12-0400 [-] reactor class: twisted.internet.selectreactor.SelectReactor.
+2013-04-08 15:48:22-0400 [-] Received SIGTERM, shutting down.
+2013-04-08 15:48:22-0400 [-] Main loop terminated.
+2013-04-08 15:48:22-0400 [-] Server Shut Down.
+2013-04-10 22:41:14-0400 [-] Log opened.
+2013-04-10 22:41:14-0400 [-] twistd 13.0.0 (/Users/bhall/Documents/Lab/CryptoLotus/dev/env/bin/python 2.7.2) starting up.
+2013-04-10 22:41:14-0400 [-] reactor class: twisted.internet.selectreactor.SelectReactor.
+2013-04-10 22:41:14-0400 [-] SimulatorFactory starting on 8080
+2013-04-10 22:41:14-0400 [-] Starting factory <simulator.SimulatorFactory instance at 0x109413b00>
+2013-04-10 22:42:03-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:05-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:09-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:10-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:11-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:11-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:11-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:12-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 22:42:12-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 23:30:38-0400 [simulator.SimulatorFactory] Unhandled Error
+	Traceback (most recent call last):
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/log.py", line 73, in callWithContext
+	    return context.call({ILogContext: newCtx}, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 118, in callWithContext
+	    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/python/context.py", line 81, in callWithContext
+	    return func(*args,**kw)
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/selectreactor.py", line 151, in _doReadOrWrite
+	    why = getattr(selectable, method)()
+	--- <exception caught here> ---
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/tcp.py", line 1063, in doRead
+	    protocol = self.factory.buildProtocol(self._buildAddr(addr))
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/env/lib/python2.7/site-packages/twisted/internet/protocol.py", line 102, in buildProtocol
+	    p = self.protocol()
+	  File "/Users/bhall/Documents/Lab/CryptoLotus/dev/simulator.py", line 12, in __init__
+	    self.factory.conductor.addBlossomProvider(self)
+	exceptions.AttributeError: SimulatorProtocol instance has no attribute 'factory'
+	
+2013-04-10 23:30:46-0400 [-] Received SIGTERM, shutting down.
+2013-04-10 23:30:46-0400 [-] (TCP Port 8080 Closed)
+2013-04-10 23:30:46-0400 [-] Stopping factory <simulator.SimulatorFactory instance at 0x109413b00>
+2013-04-10 23:30:46-0400 [-] Main loop terminated.
+2013-04-10 23:30:46-0400 [-] Server Shut Down.
