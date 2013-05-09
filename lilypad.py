@@ -5,6 +5,7 @@ SHOW_PATTERN = "pattern"
 PRESS_EVENT = "press"
 RELEASE_EVENT = "release"
 
+
 class LilyPad:
     def __init__(self, lotus, id):
         self.lotus = lotus
@@ -16,4 +17,3 @@ class LilyPad:
 
     def fadeToColor(self, color, duration, easing=0):
         self.lotus.updateLilypad(self.id, FADE_COLOR, [color, duration, easing])
-

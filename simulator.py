@@ -8,6 +8,7 @@ from twisted.python import log
 
 INIT_EVENT = 'init'
 
+
 class SimulatorProtocol(WebSocketServerProtocol):
 
     def __init__(self, factory):
@@ -61,14 +62,14 @@ class SimulatorProtocol(WebSocketServerProtocol):
         message['type'] = 'audio'
         message['index'] = index
 
-        self.sendMessage(json.dumps(message))    
+        self.sendMessage(json.dumps(message))
 
     def connectionMade(self):
         WebSocketServerProtocol.connectionMade(self)
         log.msg("Simulator connected...")
         self.factory.lotus.addBlossomProvider(self)
         self.factory.lotus.addLilypadProvider(self)
-        self.factory.lotus.addMusicProvider(self)        
+        self.factory.lotus.addMusicProvider(self)
 
     def connectionLost(self, reason):
         WebSocketServerProtocol.connectionLost(self, reason)
@@ -77,11 +78,11 @@ class SimulatorProtocol(WebSocketServerProtocol):
 
 class SimulatorFactory(WebSocketServerFactory):
 
-    def __init__(self, lotus, url, debug = False, debugCodePaths = False):
-        WebSocketServerFactory.__init__(self, url, debug = debug, debugCodePaths = debugCodePaths)
+    def __init__(self, lotus, url, debug=False, debugCodePaths=False):
+        WebSocketServerFactory.__init__(self, url, debug=debug, debugCodePaths=debugCodePaths)
         self.lotus = lotus
         self.protocol = SimulatorProtocol
-        self.setProtocolOptions(allowHixie76 = True)
+        self.setProtocolOptions(allowHixie76=True)
 
     def buildProtocol(self, addr):
         return SimulatorProtocol(self)

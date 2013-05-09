@@ -11,8 +11,10 @@ from blossom import Blossom
 
 NUM_LILYPADS = 6
 
+
 def makeColor(r, g, b):
     return r << 16 | g << 8 | b
+
 
 def colorWheel(pos):
     if pos < 85:
@@ -20,11 +22,12 @@ def colorWheel(pos):
 
     elif pos < 170:
         pos -= 85
-        return makeColor(255 - pos * 3, 0, pos *3)
+        return makeColor(255 - pos * 3, 0, pos * 3)
 
     else:
         pos -= 170
         return makeColor(0, pos * 3, 255 - pos * 3)
+
 
 class CryptoLotus(service.Service):
 
@@ -41,13 +44,10 @@ class CryptoLotus(service.Service):
 
         self.loop_index = 0
         self.loop = task.LoopingCall(self.drawRainbow)
-        
-
-
 
     def addSimulator(self, simulator):
         self.blossom.update()
-        self.loop.start(1.0/30.0)
+        self.loop.start(1.0/60.0)
 
     def addLilypadProvider(self, provider):
         self.lilypad_providers.append(provider)
@@ -56,19 +56,18 @@ class CryptoLotus(service.Service):
         self.blossom_providers.append(provider)
 
     def addMusicProvider(self, provider):
-        self.music_providers.append(provider)  
+        self.music_providers.append(provider)
 
     def updateBlossom(self, blossom):
         for provider in self.blossom_providers:
             provider.updateBlossom(blossom)
 
     def drawRainbow(self):
-        for i in range(2160):
+        for i in range(720):
             self.blossom[i] = colorWheel(((i * 256 / 256) + self.loop_index) % 256)
 
-        self.loop_index +=1
+        self.loop_index += 1
         self.blossom.update()
-
 
     def getSimulatorFactory(self):
         f = SimulatorFactory(self, 'ws://0.0.0.0:%d' % (settings.SIMULATOR_PORT,))

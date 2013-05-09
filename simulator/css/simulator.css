@@ -1,42 +1,18 @@
 body {
-    background-color: #000;
-    font-family: monospace;
+    background-color: #222;
+    font-family: "Tahoma";
+    font-size: 0.8em;
     color: #fff;
+    font-weight: normal;
+
 }
 
-.petal {
-    border: 1px solid #666;
-    width: 24px;
+canvas {
     float: left;
-    margin:5px
 }
 
-.petal p {
-    color: #fff;
-    text-align: center;
-    clear: both;
-    margin-bottom: 5px;
-}
-
-.led {
-    display: block;
-    width: 4px;
-    height: 4px;
-    border-radius: 2px;
-    margin-left: 4px;
-    margin-right: 4px;
-    margin-top: 2px;
-    background-color: #fff;
-}
-
-.petal-left {
-    width: 50%;
-    float: left;
-    margin-bottom: 5px;
-}
-
-.petal-right {
-    width: 50%;
-    float: left;
-    margin-bottom: 5px;
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
 }

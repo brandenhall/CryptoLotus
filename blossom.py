@@ -1,7 +1,8 @@
 from twisted.python import log
 
 NUM_PETALS = 12
-NUM_LIGHTS_PER_PETAL = 180
+NUM_LIGHTS_PER_PETAL = 60
+
 
 class Petal:
 
@@ -19,6 +20,7 @@ class Petal:
     def serialize(self):
         self.is_dirty = False
         return self._pixels
+
 
 class Blossom:
 
