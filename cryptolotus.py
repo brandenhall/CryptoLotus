@@ -2,31 +2,15 @@ import settings
 
 from twisted.application import service, internet
 from twisted.python import log
-from twisted.internet import reactor
 from twisted.internet import task
 
 from simulator import SimulatorFactory
 from lilypad import LilyPad
 from blossom import Blossom
+from blossom.modes import ColorWheel, Paparazzi, SlitScan
 
 NUM_LILYPADS = 6
-
-
-def makeColor(r, g, b):
-    return r << 16 | g << 8 | b
-
-
-def colorWheel(pos):
-    if pos < 85:
-        return makeColor(pos * 3, 255 - pos * 3, 0)
-
-    elif pos < 170:
-        pos -= 85
-        return makeColor(255 - pos * 3, 0, pos * 3)
-
-    else:
-        pos -= 170
-        return makeColor(0, pos * 3, 255 - pos * 3)
+FRAME_RATE = 30.0
 
 
 class CryptoLotus(service.Service):
@@ -36,18 +20,28 @@ class CryptoLotus(service.Service):
         self.lilypads = []
 
         for i in range(NUM_LILYPADS):
-            self.lilypads.append(LilyPad(self, i + 1))
+            self.lilypads.append(LilyPad(self, i))
 
         self.blossom_providers = []
         self.lilypad_providers = []
-        self.music_providers = []
+
+        self.blossom_mode = SlitScan('assets/attract/lol7.png', -1)
+
+        try:
+            from ws2801 import WS2801
+
+            self.strips = WS2801()
+            self.addBlossomProvider(self.strips)
+
+        except:
+            log.msg("Could not initialize WS2801 strips over SPI!")
 
         self.loop_index = 0
-        self.loop = task.LoopingCall(self.drawRainbow)
+        self.loop = task.LoopingCall(self.update)
+        self.loop.start(1.0/FRAME_RATE)
 
     def addSimulator(self, simulator):
-        self.blossom.update()
-        self.loop.start(1.0/60.0)
+        pass
 
     def addLilypadProvider(self, provider):
         self.lilypad_providers.append(provider)
@@ -55,18 +49,22 @@ class CryptoLotus(service.Service):
     def addBlossomProvider(self, provider):
         self.blossom_providers.append(provider)
 
-    def addMusicProvider(self, provider):
-        self.music_providers.append(provider)
-
     def updateBlossom(self, blossom):
         for provider in self.blossom_providers:
             provider.updateBlossom(blossom)
 
-    def drawRainbow(self):
-        for i in range(720):
-            self.blossom[i] = colorWheel(((i * 256 / 256) + self.loop_index) % 256)
+    def onLilypadPress(self, id):
+        log.msg("Press lilypad %d" % (id,))
 
-        self.loop_index += 1
+    def onLilypadRelease(self, id):
+        log.msg("Release lilypad %d" % (id,))
+
+    def updateLilypad(self, lilypad):
+        for provider in self.lilypad_providers:
+            provider.updateLilypad(lilypad)
+
+    def update(self):
+        self.blossom_mode.draw(self.blossom)
         self.blossom.update()
 
     def getSimulatorFactory(self):

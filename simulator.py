@@ -48,19 +48,11 @@ class SimulatorProtocol(WebSocketServerProtocol):
 
         self.sendMessage(json.dumps(message))
 
-    def updateLilypad(self, id, command, values):
+    def updateLilypad(self, lilypad):
         message = {}
         message['type'] = 'lilypad'
-        message['id'] = id
-        message['command'] = command
-        message['values'] = values
-
-        self.sendMessage(json.dumps(message))
-
-    def playNote(self, index):
-        message = {}
-        message['type'] = 'audio'
-        message['index'] = index
+        message['id'] = lilypad.id
+        message['color'] = lilypad.color
 
         self.sendMessage(json.dumps(message))
 
@@ -69,7 +61,6 @@ class SimulatorProtocol(WebSocketServerProtocol):
         log.msg("Simulator connected...")
         self.factory.lotus.addBlossomProvider(self)
         self.factory.lotus.addLilypadProvider(self)
-        self.factory.lotus.addMusicProvider(self)
 
     def connectionLost(self, reason):
         WebSocketServerProtocol.connectionLost(self, reason)
