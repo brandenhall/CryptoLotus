@@ -13,10 +13,42 @@
     var leds = [];
     var stage;
     var blossom;
+    var lilypads = [];
+
+    var keyTable = {};
+    keyTable[49] = {id:0, down:false};
+    keyTable[50] = {id:1, down:false};
+    keyTable[51] = {id:2, down:false};
+    keyTable[52] = {id:3, down:false};
+    keyTable[53] = {id:4, down:false};
+    keyTable[54] = {id:5, down:false};
 
     function onReady() {
-
         createBlossom();
+
+        lilypads[0] = $('#pad0')[0];
+        lilypads[1] = $('#pad1')[0];
+        lilypads[2] = $('#pad2')[0];
+        lilypads[3] = $('#pad3')[0];
+        lilypads[4] = $('#pad4')[0];
+        lilypads[5] = $('#pad5')[0];
+
+        $(document).bind("keydown", onKeyDown);
+        $(document).bind("keyup", onKeyUp);
+    }
+
+    function onKeyDown(e) {
+        if (keyTable[e.keyCode] != null && keyTable[e.keyCode].down === false) {
+            keyTable[e.keyCode].down = true;
+            sendPress(keyTable[e.keyCode].id);
+        }
+    }
+
+    function onKeyUp(e) {
+        if (keyTable[e.keyCode] != null && keyTable[e.keyCode].down === true) {
+            keyTable[e.keyCode].down = false;
+            sendRelease(keyTable[e.keyCode].id);
+        }
     }
 
     function createBlossom() {
@@ -113,9 +145,22 @@
         }
     }
 
-    function onWebSocketOpen(event) {
-        console.log("CONNECTED!");
+    function updateLilypad(id, color) {
+        var c = 'rgb(' + (color >> 16 & 0xFF) + ',' + (color >> 8 & 0xFF) + ',' + (color & 0xFF) + ')';
+        lilypads[id].style.backgroundColor = c;
+    }
 
+    function sendPress(id) {
+        var msg = JSON.stringify({"type":"press", "id":id});
+        ws.send(msg);
+    }
+
+    function sendRelease(id) {
+        var msg = JSON.stringify({"type":"release", "id":id});
+        ws.send(msg);
+    }
+
+    function onWebSocketOpen(event) {
         var msg = JSON.stringify({"type":"init"});
         ws.send(msg);
     }
@@ -134,6 +179,10 @@
         if (data['type'] == 'blossom') {
             updateLEDs(data['data']);
             stage.update();
+        }
+
+        if (data['type'] == 'lilypad') {
+            updateLilypad(data['id'], data['color']);
         }
     }
 

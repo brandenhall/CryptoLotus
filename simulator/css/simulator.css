@@ -7,8 +7,15 @@ body {
 
 }
 
-canvas {
+.lilypad {
     float: left;
+    border: 1px solid #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
+    background-color: #000;
 }
 
 .group:after {
