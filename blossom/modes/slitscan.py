@@ -1,5 +1,6 @@
-from PIL import Image
+import settings
 
+from PIL import Image
 from twisted.python import log
 
 class SlitScan:
@@ -10,32 +11,32 @@ class SlitScan:
         self.offset = 0
         (self.width, self.height) = self.im.size
         self.raw_data = self.im.getdata()
+        self.len_raw_data = len(self.raw_data)
 
     def draw(self, blossom):
         index = 0
+        half_petal = settings.LEDS_PER_PETAL / 2
+        half_petals = settins.PETALS * 2
 
-        for i, petal in enumerate(blossom.petals):
+        for i in range(settings.PETALS):
 
-            for j in range(30):
-                pixel = (self.offset * 24) + 720  - (j * 24) + (i * 2)
-                if pixel > len(self.raw_data) - 1:
-                    pixel -= len(self.raw_data)
-                if pixel < 0:
-                    pixel += len(self.raw_data)
+            for j in range(half_petal):
 
-                blossom[index] = self.raw_data[pixel][2] << 16 | self.raw_data[pixel][1] << 8 | self.raw_data[pixel][0]
+                # left half of the petal
+                pixel = ((self.offset * settings.PETALS * 2) + 720  - (j * halsettings.PETALS * 2) + (i * 2)) % self.len_raw_data
+                blossom.data[index * 3] = self.raw_data[pixel][0]
+                blossom.data[index * 3 + 1] = self.raw_data[pixel][1]
+                blossom.data[index * 3 + 2] = self.raw_data[pixel][2]
+
+                # right half of the petal
+                pixel = ((self.offset * settings.PETALS * 2) + (j * settings.PETALS * 2) + (i * 2) + 1) % self.len_raw_data
+                blossom.data[(index + half_petal) * 3] = self.raw_data[pixel][0]
+                blossom.data[(index + half_petal) * 3 + 1] = self.raw_data[pixel][1]
+                blossom.data[(index + half_petal) * 3 + 2] = self.raw_data[pixel][2]
 
                 index += 1
 
-            for j in range(30):
-                pixel = (self.offset * 24) + (j * 24) + (i * 2) + 1
-                if pixel > len(self.raw_data) - 1:
-                    pixel -= len(self.raw_data)
-                if pixel < 0:
-                    pixel += len(self.raw_data)
-
-                blossom[index] = self.raw_data[pixel][2] << 16 | self.raw_data[pixel][1] << 8 | self.raw_data[pixel][0]
-                index += 1
+            index += half_petal
 
         self.offset += self.speed
 

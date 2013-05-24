@@ -126,16 +126,14 @@
     }
 
     function updateLEDs(colors) {
-        var max = colors.length;
+        var max = leds.length;
 
         for (var i=0; i<max; ++i) {
             var led;
-            var color = colors[i];
-            color >>= 0;
-            var b = color & 0xFF,
-                g = (color & 0xFF00) >>> 8,
-                r = (color & 0xFF0000) >>> 16;
-            var fillColor = createjs.Graphics.getRGB(r, g, b, 0.3);
+            var b = colors[i * 3]
+                g = colors[i * 3 + 1]
+                r = colors[i * 3 + 2]
+            var fillColor = createjs.Graphics.getRGB(r, g, b, 1);
 
             led = leds[i];
             led.graphics.clear();

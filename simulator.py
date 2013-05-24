@@ -44,7 +44,7 @@ class SimulatorProtocol(WebSocketServerProtocol):
     def updateBlossom(self, blossom):
         message = {}
         message['type'] = 'blossom'
-        message['data'] = blossom.serialize()
+        message['data'] = blossom.data
 
         self.sendMessage(json.dumps(message))
 

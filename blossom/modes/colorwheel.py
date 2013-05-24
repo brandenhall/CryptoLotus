@@ -1,24 +1,20 @@
+import settings
+import colorsys
+
+
 class ColorWheel:
-    def __init__(self):
-        self.loop_index = 0
-
-    def makeColor(self, r, g, b):
-        return r << 16 | g << 8 | b
-
-    def colorWheel(self, pos):
-        if pos < 85:
-            return self.makeColor(pos * 3, 255 - pos * 3, 0)
-
-        elif pos < 170:
-            pos -= 85
-            return self.makeColor(255 - pos * 3, 0, pos * 3)
-
-        else:
-            pos -= 170
-            return self.makeColor(0, pos * 3, 255 - pos * 3)
+    def __init__(self, speed, brightness=0.5):
+        self.offset = 0
+        self.speed = speed
+        self.brightness = brightness
+        self.step = 1 / (settings.LEDS + 1)
 
     def draw(self, blossom):
-        for i in range(720):
-            blossom[i] = self.colorWheel(((i * 256 / 256) + self.loop_index) % 256)
+        for i in range(settings.NUM_LIGHTS):
+            hue = (self.offset + (i * self.step)) % 1
+            rgb = colorsys.hsv_to_rgb(hue, 1, self.brightness)
+            blossom.data[i * 3] = int(rgb[0] * 255)
+            blossom.data[i * 3 + 1] = int(rgb[1] * 255)
+            blossom.data[i * 3 + 2] = int(rgb[2] * 255)
 
-        self.loop_index += 1
+        self.offset = (self.offset + self.speed) % 1

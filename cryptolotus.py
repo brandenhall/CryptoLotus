@@ -25,7 +25,7 @@ class CryptoLotus(service.Service):
         self.blossom_providers = []
         self.lilypad_providers = []
 
-        self.blossom_mode = SlitScan('assets/attract/lol7.png', -1)
+        self.blossom_mode = SlitScan('assets/attract/ant-lotusrainwave.jpg', -1)
 
         try:
             from ws2801 import WS2801
