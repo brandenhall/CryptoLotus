@@ -114,9 +114,16 @@ class CryptoLotus(service.Service):
     def getSimulatorFactory(self):
         f = SimulatorFactory(self, 'ws://0.0.0.0:%d' % (settings.SIMULATOR_PORT,))
         return f
+   
+    def stopService(self):
+        service.Service.stopService(self)
+        self.blossom.data = [0,0,0] * 720
+        self.blossom.update()
+        self.loop.stop()
 
 application = service.Application("CryptoLotus")
-serviceCollection = service.IServiceCollection(application)
-service = CryptoLotus()
+service_collection = service.IServiceCollection(application)
+lotus = CryptoLotus()
+lotus.setServiceParent(service_collection)
 
-internet.TCPServer(settings.SIMULATOR_PORT, service.getSimulatorFactory()).setServiceParent(serviceCollection)
+internet.TCPServer(settings.SIMULATOR_PORT, lotus.getSimulatorFactory()).setServiceParent(service_collection)

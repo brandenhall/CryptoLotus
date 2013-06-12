@@ -1,4 +1,7 @@
 import spi
+import time
+
+from twisted.python import log
 
 class WS2801():
     def __init__(self):
@@ -6,9 +9,7 @@ class WS2801():
         self.spi.msh = 1000000
 
     def updateBlossom(self, blossom):
-        segments = []
-        for i in range(48)
-            segments.append(blossom.data[i * 15:i * 15 + 15])
-
-        for segment in segments:
-            self.spi.writebytes(segment)
+        for i in range(72):
+            self.spi.writebytes(blossom.data[i * 30:i * 30 + 30])
+            
+        time.sleep(0.001)

@@ -16,8 +16,8 @@ class ColorWheel:
         for i in range(settings.LEDS):
             hue = math.fmod(self.offset + (i * self.step), 1)
             rgb = colorsys.hsv_to_rgb(hue, 1, self.brightness)
-            blossom.data[i * 3 + 2] = int(rgb[0] * 255)
+            blossom.data[i * 3 + 1] = int(rgb[0] * 255)
             blossom.data[i * 3] = int(rgb[1] * 255)
-            blossom.data[i * 3 + 1] = int(rgb[2] * 255)
+            blossom.data[i * 3 + 2] = int(rgb[2] * 255)
 
         self.offset = math.fmod(self.offset + self.speed, 1)

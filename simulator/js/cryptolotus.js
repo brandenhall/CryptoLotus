@@ -8,7 +8,7 @@
     var INNER_RADIUS = 110;
     var OUTER_RADIUS = 300;
     var IN_STEP = 50;
-    var WEBSOCKET_SERVER = "ws://127.0.0.1:8080/";
+    var WEBSOCKET_SERVER = "ws://" + location.host.split(":")[0] + ":8080/";
 
     var leds = [];
     var stage;
