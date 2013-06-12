@@ -1,6 +1,8 @@
 import random
 import settings
 
+from twisted.python import log
+
 
 class Paparazzi:
 
@@ -15,6 +17,6 @@ class Paparazzi:
 
         for i in range(self.flashes):
             index = random.randint(0, settings.LEDS - 1)
-            blossom.data[index * 3] = r
-            blossom.data[index * 3 + 1] = g
-            blossom.data[index * 3 + 2] = b
+            blossom.data[index * 3 + 2] = self.r
+            blossom.data[index * 3] = self.g
+            blossom.data[index * 3 + 1] = self.b

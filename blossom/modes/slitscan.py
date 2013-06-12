@@ -16,23 +16,23 @@ class SlitScan:
     def draw(self, blossom):
         index = 0
         half_petal = settings.LEDS_PER_PETAL / 2
-        half_petals = settins.PETALS * 2
+        half_petals = settings.PETALS * 2
 
         for i in range(settings.PETALS):
 
             for j in range(half_petal):
 
                 # left half of the petal
-                pixel = ((self.offset * settings.PETALS * 2) + 720  - (j * halsettings.PETALS * 2) + (i * 2)) % self.len_raw_data
-                blossom.data[index * 3] = self.raw_data[pixel][0]
-                blossom.data[index * 3 + 1] = self.raw_data[pixel][1]
-                blossom.data[index * 3 + 2] = self.raw_data[pixel][2]
+                pixel = ((self.offset * settings.PETALS * 2) + 720  - (j * settings.PETALS * 2) + (i * 2)) % self.len_raw_data
+                blossom.data[index * 3 + 2] = self.raw_data[pixel][0]
+                blossom.data[index * 3] = self.raw_data[pixel][1]
+                blossom.data[index * 3 + 1] = self.raw_data[pixel][2]
 
                 # right half of the petal
                 pixel = ((self.offset * settings.PETALS * 2) + (j * settings.PETALS * 2) + (i * 2) + 1) % self.len_raw_data
-                blossom.data[(index + half_petal) * 3] = self.raw_data[pixel][0]
-                blossom.data[(index + half_petal) * 3 + 1] = self.raw_data[pixel][1]
-                blossom.data[(index + half_petal) * 3 + 2] = self.raw_data[pixel][2]
+                blossom.data[(index + half_petal) * 3 + 2] = self.raw_data[pixel][0]
+                blossom.data[(index + half_petal) * 3] = self.raw_data[pixel][1]
+                blossom.data[(index + half_petal) * 3 + 1] = self.raw_data[pixel][2]
 
                 index += 1
 

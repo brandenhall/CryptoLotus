@@ -2,14 +2,13 @@ import spi
 
 class WS2801():
     def __init__(self):
-        spi.openSPI(speed=1000000)
+        spi.openSPI(speed=900000)
 
     def updateBlossom(self, blossom):
-        data = []
-        for i in range(12):
-            for j in range(60):
-                pixel = blossom[i * 60 + j]
-                data.append(pixel & 0xFF)
-                data.append(pixel >> 8 & 0xFF)
-                data.append(pixel >> 16 & 0xFF)
-            spi.transfer(tuple(data))
+        segments = []
+        for i in range(48)
+            segments.append(tuple(blossom.data[i * 15:i * 15 + 15]))
+
+        for segment in segments:
+            log.msg(segment)
+            spi.transfer(segment)
