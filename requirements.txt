@@ -1,4 +1,6 @@
+Pillow==2.0.0
 Twisted==13.0.0
+argparse==1.2.1
 autobahn==0.5.14
 wsgiref==0.1.2
 zope.interface==4.0.5
