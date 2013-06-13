@@ -13,7 +13,6 @@ from lilypad import LilyPad
 from blossom import Blossom
 from blossom.modes import ColorWheel, Paparazzi, SlitScan
 
-
 class CryptoLotus(service.Service):
 
     def __init__(self):
@@ -34,7 +33,7 @@ class CryptoLotus(service.Service):
         images = [f for f in listdir(settings.ATTRACT_PATH) if isfile(join(settings.ATTRACT_PATH, f))]
 
         for image in images:
-            self.normal_modes.append(SlitScan(join(settings.ATTRACT_PATH, image), 1))
+            self.normal_modes.append(SlitScan(join(settings.ATTRACT_PATH, image), 2))
 
         # reward modes
         self.reward_modes = []
@@ -93,18 +92,18 @@ class CryptoLotus(service.Service):
                 # start normal mode
                 self.blossom_mode = random.choice(self.normal_modes)
 
-        if self.frame < 256:
-            fade = 255 - self.frame
+#        if self.frame < 256:
+#            fade = 255 - self.frame
 
-        elif self.frame > settings.SHOW_TIME * settings.FRAME_RATE - 256:
-            fade = 255 - ((settings.SHOW_TIME * settings.FRAME_RATE) - self.frame)
+#        elif self.frame > settings.SHOW_TIME * settings.FRAME_RATE - 256:
+#            fade = 255 - ((settings.SHOW_TIME * settings.FRAME_RATE) - self.frame)
 
-        else:
-            fade = 0
+#        else:
+#            fade = 0
 
         self.blossom_mode.draw(self.blossom)
 
-        self.blossom.data = [max(0, x - fade) for x in self.blossom.data]
+#        self.blossom.data = [max(0, x - fade) for x in self.blossom.data]
 
         self.blossom.update()
 
