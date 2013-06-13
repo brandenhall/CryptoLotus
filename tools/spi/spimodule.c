@@ -103,8 +103,7 @@ static PyObject *
 SPI_writebytes(SPI *self, PyObject *args)
 {
 	int		status;
-	uint8_t	ii, len;
-	uint8_t	buf[32];
+	unsigned short	ii, len;
 	PyObject	*list;
 
 	if (!PyArg_ParseTuple(args, "O:write", &list))
@@ -115,10 +114,12 @@ SPI_writebytes(SPI *self, PyObject *args)
 		return NULL;
 	}
 
-	if ((len = PyList_GET_SIZE(list)) >  32) {
+	if ((len = PyList_GET_SIZE(list)) >  sizeof(unsigned short)) {
 		PyErr_SetString(PyExc_OverflowError, wrmsg);
 		return NULL;
 	}
+
+	uint8_t	buf[len];
 
 	for (ii = 0; ii < len; ii++) {
 		PyObject *val = PyList_GET_ITEM(list, ii);
