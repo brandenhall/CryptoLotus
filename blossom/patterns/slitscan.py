@@ -3,6 +3,8 @@ import settings
 from PIL import Image
 from twisted.python import log
 
+from profilehooks import timecall
+
 
 class SlitScan:
 
