@@ -32,26 +32,246 @@ class SlitScan:
         image_size = self.image_size
         data = self.data
         raw_data = self.raw_data
+        op2 = offset * petals * 2
 
-        for i in range(petals):
+        i = 0
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+            
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
 
-            for j in range(half_petal):
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
 
-                # left half of the petal
-                pixel = (((offset * petals * 2) + 720 - (j * petals * 2) + (i * 2)) % image_size) * 3
-                data[index * 3 + 1] = raw_data[pixel]
-                data[index * 3 + 2] = raw_data[pixel + 1]
-                data[index * 3] = raw_data[pixel + 2]
+            index += 1
 
-                # right half of the petal
-                pixel = (((offset * petals * 2) + (j * petals * 2) + (i * 2) + 1) % image_size) * 3
-                data[(index + half_petal) * 3 + 1] = raw_data[pixel]
-                data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
-                data[(index + half_petal) * 3] = raw_data[pixel + 2]
+        index += half_petal
+        i = 1
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
 
-                index += 1
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
 
-            index += half_petal
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 2
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 3
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 4
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 5
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 6
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 7
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 8
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 9
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 10
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
+
+        index += half_petal
+        i = 11
+        i2 = i * 2
+        for j in range(half_petal):
+            jp2 = j * petals * 2
+
+            # left half of the petal
+            pixel = ((op2 + 720 - jp2 + i2) % image_size) * 3
+            data[index * 3 + 1] = raw_data[pixel]
+            data[index * 3 + 2] = raw_data[pixel + 1]
+            data[index * 3] = raw_data[pixel + 2]
+
+            # right half of the petal
+            pixel = ((op2 + jp2 + i2 + 1) % image_size) * 3
+            data[(index + half_petal) * 3 + 1] = raw_data[pixel]
+            data[(index + half_petal) * 3 + 2] = raw_data[pixel + 1]
+            data[(index + half_petal) * 3] = raw_data[pixel + 2]
+
+            index += 1
 
         self.offset += self.speed
 
