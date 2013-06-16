@@ -92,35 +92,10 @@ class CryptoLotus(service.Service):
         self.mode = mode
         self.mode.startMode()
 
-    @timecall(immediate=True)
+    @timecall
     def update(self):
-        
-        # if self.frame == 0:
-        #     self.cycle = (self.cycle + 1) % settings.REWARD_RATE
-
-        #     if self.cycle == 0:
-        #         pass
-        #     else:
-        #         # start normal mode
-        #         self.blossom_mode = random.choice(self.normal_modes)
-
-        # if self.frame < 256:
-        #     fade = 255 - self.frame
-
-        # elif self.frame > settings.SHOW_TIME * settings.FRAME_RATE - 256:
-        #     fade = 255 - ((settings.SHOW_TIME * settings.FRAME_RATE) - self.frame)
-
-        # else:
-        #     fade = 0
-
         self.mode.update()
-
-        # self.blossom.data = [max(0, x - fade) for x in self.blossom.data]
-
         self.blossom.update()
-
-        # self.frame += 1
-        # self.frame %= settings.SHOW_TIME * settings.FRAME_RATE
 
     def getSimulatorFactory(self):
         f = SimulatorFactory(self, 'ws://0.0.0.0:%d' % (settings.SIMULATOR_PORT,))
