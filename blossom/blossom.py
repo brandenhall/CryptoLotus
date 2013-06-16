@@ -10,5 +10,9 @@ class Blossom:
         self.data = []
         self.data = [0] * (settings.LEDS * 3)
 
+    def clear(self):
+        self.data = [0] * (settings.LEDS * 3)
+        self.update();
+
     def update(self):
         self.lotus.updateBlossom(self)
