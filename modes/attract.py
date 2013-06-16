@@ -17,7 +17,6 @@ class AttractMode:
         images = [f for f in listdir(settings.ATTRACT_PATH) if isfile(join(settings.ATTRACT_PATH, f))]
         for image in images:
             self.patterns.append(SlitScan(join(settings.ATTRACT_PATH, image), 2))
-            self.patterns.append(SlitScan(join(settings.ATTRACT_PATH, image), -2))
 
     def startMode(self):
         for lilypad in self.lotus.lilypads:
@@ -44,7 +43,7 @@ class AttractMode:
                 self.is_transitioning = False
 
             else:
-                inv = 2 * self.transition + 1
+                inv = 4 * self.transition + 1
                 alpha = 257 - inv
 
                 back_buffer = self.back_pattern.draw()
@@ -61,8 +60,7 @@ class AttractMode:
 
             # done with pattern, pick the next one
             if self.frame == 0:
-                log.msg("CHANGE PATTERN!")
                 self.is_transitioning = True
                 self.front_pattern = random.choice(self.patterns)
-                self.transition = 128
+                self.transition = 64
         
