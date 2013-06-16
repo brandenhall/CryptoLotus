@@ -93,7 +93,7 @@ SPI_dealloc(SPI *self)
 #define MAXPATH 16
 
 static char *wrmsg = "Argument must be a list of at least one, "
-				"but not more than 32 integers";
+				"but not more than 65535 integers";
 
 PyDoc_STRVAR(SPI_write_doc,
 	"write([values]) -> None\n\n"
@@ -114,7 +114,7 @@ SPI_writebytes(SPI *self, PyObject *args)
 		return NULL;
 	}
 
-	if ((len = PyList_GET_SIZE(list)) >  sizeof(unsigned short)) {
+	if ((len = PyList_GET_SIZE(list)) >  65535) {
 		PyErr_SetString(PyExc_OverflowError, wrmsg);
 		return NULL;
 	}
