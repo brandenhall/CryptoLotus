@@ -16,7 +16,8 @@ class AttractMode:
 
         images = [f for f in listdir(settings.ATTRACT_PATH) if isfile(join(settings.ATTRACT_PATH, f))]
         for image in images:
-            self.patterns.append(SlitScan(join(settings.ATTRACT_PATH, image), 1))
+            self.patterns.append(SlitScan(join(settings.ATTRACT_PATH, image), 2))
+            self.patterns.append(SlitScan(join(settings.ATTRACT_PATH, image), -2))
 
     def startMode(self):
         for lilypad in self.lotus.lilypads:
