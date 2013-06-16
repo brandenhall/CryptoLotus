@@ -26,14 +26,14 @@ class SlitScan:
                 # left half of the petal
                 pixel = ((self.offset * settings.PETALS * 2) + 720  - (j * settings.PETALS * 2) + (i * 2)) % self.len_raw_data
                 self.data[index * 3 + 1] = self.raw_data[pixel][0]
-                self.data[index * 3] = self.raw_data[pixel][1]
-                self.data[index * 3 + 2] = self.raw_data[pixel][2]
+                self.data[index * 3 + 2] = self.raw_data[pixel][1]
+                self.data[index * 3] = self.raw_data[pixel][2]
 
                 # right half of the petal
                 pixel = ((self.offset * settings.PETALS * 2) + (j * settings.PETALS * 2) + (i * 2) + 1) % self.len_raw_data
                 self.data[(index + half_petal) * 3 + 1] = self.raw_data[pixel][0]
-                self.data[(index + half_petal) * 3] = self.raw_data[pixel][1]
-                self.data[(index + half_petal) * 3 + 2] = self.raw_data[pixel][2]
+                self.data[(index + half_petal) * 3 + 2] = self.raw_data[pixel][1]
+                self.data[(index + half_petal) * 3] = self.raw_data[pixel][2]
 
                 index += 1
 
@@ -47,5 +47,5 @@ class SlitScan:
         if self.offset >= self.height:
             self.offset -= self.height
 
-        return self.data
+        return data
 

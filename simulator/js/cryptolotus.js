@@ -131,8 +131,8 @@
         for (var i=0; i<max; ++i) {
             var led;
             var b = colors[i * 3]
-                g = colors[i * 3 + 1]
-                r = colors[i * 3 + 2]
+                g = colors[i * 3 + 2]
+                r = colors[i * 3 + 1]
             var fillColor = createjs.Graphics.getRGB(r, g, b, 1);
 
             led = leds[i];
