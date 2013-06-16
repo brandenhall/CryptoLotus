@@ -10,4 +10,3 @@ class WS2801():
     
     def updateBlossom(self, blossom):
         self.spi.writebytes(blossom.data)
-	time.sleep(0.001)
