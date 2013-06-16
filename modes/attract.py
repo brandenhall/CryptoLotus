@@ -1,5 +1,7 @@
 import settings
 import random
+import colorsys
+import math
 
 from os import listdir
 from os.path import isfile, join
@@ -13,10 +15,13 @@ class AttractMode:
         self.lotus = lotus
         self.patterns = []
         self.frame = 0
+        self.lilypad_frame = 0
+        self.lilypad = 0
+        self.lilypad_hue = 0.0
 
         images = [f for f in listdir(settings.ATTRACT_PATH) if isfile(join(settings.ATTRACT_PATH, f))]
         for image in images:
-            self.patterns.append(SlitScan(join(settings.ATTRACT_PATH, image), 2))
+            self.patterns.append(SlitScan(join(settings.ATTRACT_PATH, image), 1))
 
     def startMode(self):
         for lilypad in self.lotus.lilypads:
@@ -63,4 +68,24 @@ class AttractMode:
                 self.is_transitioning = True
                 self.front_pattern = random.choice(self.patterns)
                 self.transition = 64
+
+        if self.lilypad_frame == 0:
+            self.lilypad_hue = math.fmod(self.lilypad_hue, 1)
+            rgb = colorsys.hsv_to_rgb(self.lilypad_hue, 1, settings.ATTRACT_LILYPAD_BRIGHTNESS)
+
+            self.lilypad_hue += settings.ATTRACT_LILYPAD_HUE_STEP
+            self.lilypad += 1
+            self.lilypad %= settings.LILYPADS
+
+
+            for i, lilypad in enumerate(self.lotus.lilypads):
+                if i != self.lilypad:
+                    lilypad.setColor(0)
+                else:
+                    lilypad.setColor(int(rgb[0] * 255) << 16 | int(rgb[1] * 255) << 8 | int(rgb[2] * 255))
+
+        self.lilypad_frame += 1
+
+        if self.lilypad_frame == settings.ATTRACT_LILYPAD_RATE:
+            self.lilypad_frame = 0
         

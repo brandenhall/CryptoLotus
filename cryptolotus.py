@@ -17,7 +17,7 @@ class CryptoLotus(service.Service):
         self.blossom = Blossom(self)
         self.lilypads = []
 
-        for i in range(settings.NUM_LILYPADS):
+        for i in range(settings.LILYPADS):
             self.lilypads.append(LilyPad(self, i))
 
         self.blossom_providers = []
