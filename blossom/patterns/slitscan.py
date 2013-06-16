@@ -24,19 +24,25 @@ class SlitScan:
     def draw(self):
         index = 0
         half_petal = settings.LEDS_PER_PETAL / 2
+        p2 = settings.PETALS * 2
+        right = self.offset * p2
+        left = right + 720
+
 
         for i in range(settings.PETALS):
+            i2 = i * 2
 
             for j in range(half_petal):
+                jp2 = p2 * j
 
                 # left half of the petal
-                pixel = (((self.offset * settings.PETALS * 2) + 720 - (j * settings.PETALS * 2) + (i * 2)) % self.image_size) * 3
+                pixel = ((left - jp2 + i2) % self.image_size) * 3
                 self.data[index * 3 + 1] = self.raw_data[pixel]
                 self.data[index * 3 + 2] = self.raw_data[pixel + 1]
                 self.data[index * 3] = self.raw_data[pixel + 2]
 
                 # right half of the petal
-                pixel = (((self.offset * settings.PETALS * 2) + (j * settings.PETALS * 2) + (i * 2) + 1) % self.image_size) * 3
+                pixel = ((right + jp2 + i2 + 1) % self.image_size) * 3
                 self.data[(index + half_petal) * 3 + 1] = self.raw_data[pixel]
                 self.data[(index + half_petal) * 3 + 2] = self.raw_data[pixel + 1]
                 self.data[(index + half_petal) * 3] = self.raw_data[pixel + 2]
