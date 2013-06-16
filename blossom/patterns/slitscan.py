@@ -47,5 +47,5 @@ class SlitScan:
         if self.offset >= self.height:
             self.offset -= self.height
 
-        return data
+        return self.data
 
