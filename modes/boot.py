@@ -17,12 +17,12 @@ class BootMode:
 
     def update(self):
         if self.frame < settings.TEST_FRAMES:
-            self.lotus.blossom.data = [0,0,255] * settings.LEDS
+            self.lotus.blossom.data = [0,255,0] * settings.LEDS
             for lilypad in self.lotus.lilypads:
                 lilypad.setColor(255 << 16)
 
         elif self.frame < settings.TEST_FRAMES * 2:
-            self.lotus.blossom.data = [0,255,0] * settings.LEDS
+            self.lotus.blossom.data = [0,0,255] * settings.LEDS
             for lilypad in self.lotus.lilypads:
                 lilypad.setColor(255 << 8)
 
