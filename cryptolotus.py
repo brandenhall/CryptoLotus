@@ -92,7 +92,6 @@ class CryptoLotus(service.Service):
         self.mode = mode
         self.mode.startMode()
 
-    @timecall
     def update(self):
         self.mode.update()
         self.blossom.update()

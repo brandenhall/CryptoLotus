@@ -3,6 +3,8 @@ import settings
 from PIL import Image
 from twisted.python import log
 
+from profilehooks import timecall
+
 
 class SlitScan:
 
@@ -21,6 +23,7 @@ class SlitScan:
 
         self.data = [0, 0, 0] * settings.LEDS
 
+    @timecall
     def draw(self):
         index = 0
         half_petal = settings.LEDS_PER_PETAL / 2
