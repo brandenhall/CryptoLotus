@@ -21,6 +21,7 @@ class SlitScan:
 
         self.data = [0, 0, 0] * settings.LEDS
 
+    @timecall(immediate=True)
     def draw(self):
         index = 0
         half_petal = settings.LEDS_PER_PETAL / 2
