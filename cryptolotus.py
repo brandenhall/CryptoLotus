@@ -10,6 +10,7 @@ from lilypad import LilyPad
 from blossom import Blossom
 from modes import BootMode, AttractMode, LoginMode, PlayMode
 
+from profilehooks import timecall
 
 class CryptoLotus(service.Service):
 
@@ -91,6 +92,7 @@ class CryptoLotus(service.Service):
         self.mode = mode
         self.mode.startMode()
 
+    @timecall(immediate=True)
     def update(self):
         
         # if self.frame == 0:
