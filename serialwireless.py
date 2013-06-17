@@ -5,6 +5,7 @@ from twisted.python import log
 class SerialWireless(LineReceiver):
 
     def __init__(self, lotus):
+        self.reset_code = chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
         self.lotus = lotus
 
     def connectionMade(self):
@@ -20,7 +21,7 @@ class SerialWireless(LineReceiver):
         self.lotus.lilypads[id].active = active
 
     def resetLilypads(self):
-        self.transport.write(chr(0))
+        self.transport.write(self.reset_code)
 
     def updateLilypad(self, lilypad):
         red = chr(lilypad.color >> 16 & 0xFF)
