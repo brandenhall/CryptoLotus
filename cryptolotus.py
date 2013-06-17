@@ -60,7 +60,7 @@ class CryptoLotus(service.Service):
         from twisted.internet.serialport import SerialPort
 
         self.wireless = SerialWireless()
-        self.serial_port = SerialPort(wireless, '/dev/ttyAMA0', reactor, 57600)
+        self.serial_port = SerialPort(self.wireless, '/dev/ttyAMA0', reactor, 57600)
         self.addLilypadProvider(self.wireless)
 
 
