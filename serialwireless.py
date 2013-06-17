@@ -9,10 +9,10 @@ class SerialWireless(LineReceiver):
 
 
     def lineReceived(self, line):
-        id = ord(line[0])
-        state = ord(line[1])
+        id = int(line[0])
+        active = line[1] == '1'
 
-        log.msg("lilypad", id, state)
+        self.factory.lotus.lilypads[id].active = active
 
     def resetLilypads(self):
         self.transport.write(chr(0))
