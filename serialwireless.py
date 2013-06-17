@@ -4,7 +4,7 @@ from twisted.python import log
 
 class SerialWireless(LineReceiver):
 
-    def __init__(self, lotus)
+    def __init__(self, lotus):
         self.lotus = lotus
 
     def connectionMade(self):
