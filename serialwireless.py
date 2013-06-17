@@ -4,6 +4,9 @@ from twisted.python import log
 
 class SerialWireless(LineReceiver):
 
+    def __init__(self, lotus)
+        self.lotus = lotus
+
     def connectionMade(self):
         log.msg('Serial port connected.')
 
@@ -14,7 +17,7 @@ class SerialWireless(LineReceiver):
 
         log.msg("Lilypad #", id, active)
 
-        self.factory.lotus.lilypads[id].active = active
+        self.lotus.lilypads[id].active = active
 
     def resetLilypads(self):
         self.transport.write(chr(0))
