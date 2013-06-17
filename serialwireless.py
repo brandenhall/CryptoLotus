@@ -1,0 +1,24 @@
+from twisted.protocols.basic import LineReceiver
+from twisted.python import log
+
+
+class SerialWireless(LineReceiver):
+
+    def connectionMade(self):
+        log.msg('Serial port connected.')
+
+
+    def lineReceived(self, line):
+        log.msg('Got serial ', line)
+
+    def reset(self):
+        self.transport.write(0)
+
+    def updateLilypad(self, lilypad):
+        self.transport.write(1)
+        self.transport.write(lilypad.id)
+        self.transport.write(lilypad.color >> 16 & 0xFF)
+        self.transport.write(lilypad.color >> 8 & 0xFF)
+        self.transport.write(lilypad.color & 0xFF)
+
+        log.msg("HOLLA! ", lilypad.id, lilypad.color)

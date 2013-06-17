@@ -38,7 +38,10 @@ class AttractMode:
         pass
 
     def update(self):
-        if self.is_transitioning:
+        if any(lilypad.active for lilypad in self.lotus.lilypads):
+            self.lotus.changeMode(self.lotus.login_mode)
+
+        elif self.is_transitioning:
             if self.transition == 0:
                 self.back_pattern = self.front_pattern
                 self.lotus.blossom.data = self.back_pattern.draw()
@@ -69,6 +72,7 @@ class AttractMode:
                 self.front_pattern = random.choice(self.patterns)
                 self.transition = 64
 
+        # make the lilypads spin
         if self.lilypad_frame == 0:
             self.lilypad_hue = math.fmod(self.lilypad_hue, 1)
             rgb = colorsys.hsv_to_rgb(self.lilypad_hue, 1, settings.ATTRACT_LILYPAD_BRIGHTNESS)

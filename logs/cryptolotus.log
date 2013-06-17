@@ -4093,3 +4093,13 @@
 2013-06-13 20:58:24+0000 [-] Stopping factory <simulator.SimulatorFactory instance at 0x26e7c38>
 2013-06-13 20:58:24+0000 [-] Main loop terminated.
 2013-06-13 20:58:24+0000 [-] Server Shut Down.
+2013-06-16 23:00:09-0400 [-] Log opened.
+2013-06-16 23:00:09-0400 [-] twistd 13.0.0 (/Users/bhall/Documents/Lab/CryptoLotus/dev/env/bin/python 2.7.2) starting up.
+2013-06-16 23:00:09-0400 [-] reactor class: twisted.internet.selectreactor.SelectReactor.
+2013-06-16 23:00:09-0400 [-] SimulatorFactory starting on 8080
+2013-06-16 23:00:09-0400 [-] Starting factory <simulator.SimulatorFactory instance at 0x109ff1fc8>
+2013-06-16 23:00:22-0400 [-] Received SIGINT, shutting down.
+2013-06-16 23:00:22-0400 [-] (TCP Port 8080 Closed)
+2013-06-16 23:00:22-0400 [-] Stopping factory <simulator.SimulatorFactory instance at 0x109ff1fc8>
+2013-06-16 23:00:22-0400 [-] Main loop terminated.
+2013-06-16 23:00:22-0400 [-] Server Shut Down.

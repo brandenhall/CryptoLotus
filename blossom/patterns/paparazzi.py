@@ -12,11 +12,13 @@ class Paparazzi:
         self.g = color >> 8 & 0xFF
         self.b = color & 0xFF
 
-    def draw(self, blossom):
-        blossom.data = [0] * (settings.LEDS * 3)
+    def draw(self):
+        data = [0] * (settings.LEDS * 3)
 
         for i in range(self.flashes):
             index = random.randint(0, settings.LEDS - 1)
-            blossom.data[index * 3 + 1] = self.r
-            blossom.data[index * 3 + 2] = self.g
-            blossom.data[index * 3] = self.b
+            data[index * 3 + 1] = self.r
+            data[index * 3 + 2] = self.g
+            data[index * 3] = self.b
+
+        return data

@@ -24,10 +24,10 @@ class SimulatorProtocol(WebSocketServerProtocol):
                 self.factory.lotus.addSimulator(self)
 
             if message['type'] == lilypad.PRESS_EVENT:
-                self.factory.lotus.onLilypadPress(int(message['id']))
+                self.factory.lotus.lilypads[int(message['id'])].active = True
 
             elif message['type'] == lilypad.RELEASE_EVENT:
-                self.factory.lotus.onLilypadRelease(int(message['id']))
+                self.factory.lotus.lilypads[int(message['id'])].active = False
 
         except ValueError:
             log.msg('Bad JSON from Simulator')

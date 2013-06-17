@@ -3,11 +3,14 @@ import random
 
 from twisted.application import service, internet
 from twisted.python import log
-from twisted.internet import task
+from twisted.internet import task, reactor
+from twisted.python.log import ILogObserver, FileLogObserver
+from twisted.python.logfile import DailyLogFile
 
 from simulator import SimulatorFactory
 from lilypad import LilyPad
 from blossom import Blossom
+from serialwireless import SerialWireless
 from modes import BootMode, AttractMode, LoginMode, PlayMode
 
 from profilehooks import timecall
@@ -53,6 +56,16 @@ class CryptoLotus(service.Service):
         except:
             log.msg("Could not initialize WS2801 strips over SPI!")
 
+        try:
+            from twisted.internet.serialport import SerialPort
+
+            self.wireless = SerialWireless()
+            self.serial_port = SerialPort(wireless, '/dev/ttyAMA0', reactor, 57600)
+            self.addLilypadProvider(self.wireless)
+
+        except:
+            log.msg("Could not initialize Raspbery Pi serial port!")
+
         self.boot_mode = BootMode(self)
         self.attract_mode = AttractMode(self)
         self.login_mode = LoginMode(self)
@@ -78,12 +91,6 @@ class CryptoLotus(service.Service):
         for provider in self.blossom_providers:
             provider.updateBlossom(blossom)
 
-    def onLilypadPress(self, id):
-        log.msg("Press lilypad %d" % (id,))
-
-    def onLilypadRelease(self, id):
-        log.msg("Release lilypad %d" % (id,))
-
     def updateLilypad(self, lilypad):
         for provider in self.lilypad_providers:
             provider.updateLilypad(lilypad)
@@ -106,6 +113,7 @@ class CryptoLotus(service.Service):
         self.loop.stop()
 
 application = service.Application("CryptoLotus")
+
 service_collection = service.IServiceCollection(application)
 lotus = CryptoLotus()
 lotus.setServiceParent(service_collection)
