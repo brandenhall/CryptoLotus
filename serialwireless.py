@@ -12,12 +12,10 @@ class SerialWireless(LineReceiver):
         log.msg('Got serial ', line)
 
     def resetLilypads(self):
-        pass
-#        self.transport.write(chr(0))
+        self.transport.write(chr(0))
 
-    def updateLilypad(self, lilypad):    
-        self.transport.write(chr(1))
-        self.transport.write(chr(lilypad.id))
-        self.transport.write(chr(lilypad.color >> 16 & 0xFF))
-        self.transport.write(chr(lilypad.color >> 8 & 0xFF))
-        self.transport.write(chr(lilypad.color & 0xFF))
+    def updateLilypad(self, lilypad):
+        red = chr(lilypad.color >> 16 & 0xFF)
+        green = chr(lilypad.color >> 8 & 0xFF)
+        blue = chr(lilypad.color & 0xFF)
+        self.transport.write(chr(1) + chr(lilypad.id) + red + green + blue);

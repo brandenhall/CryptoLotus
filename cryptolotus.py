@@ -56,6 +56,9 @@ class CryptoLotus(service.Service):
         except:
             log.msg("Could not initialize WS2801 strips over SPI!")
 
+        self.wireless = None
+        self.serial_port = None
+
         try:
             from twisted.internet.serialport import SerialPort
 
