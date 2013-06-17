@@ -56,6 +56,9 @@ class SimulatorProtocol(WebSocketServerProtocol):
 
         self.sendMessage(json.dumps(message))
 
+    def resetLilypads(self):
+        pass
+
     def connectionMade(self):
         WebSocketServerProtocol.connectionMade(self)
         log.msg("Simulator connected...")

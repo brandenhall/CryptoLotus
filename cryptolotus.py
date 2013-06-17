@@ -95,6 +95,10 @@ class CryptoLotus(service.Service):
         for provider in self.lilypad_providers:
             provider.updateLilypad(lilypad)
 
+    def resetLilypads(self):
+        for provider in self.lilypad_providers:
+            provider.resetLilypads()
+
     def changeMode(self, mode):
         self.mode = mode
         self.mode.startMode()
