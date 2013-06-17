@@ -9,7 +9,10 @@ class SerialWireless(LineReceiver):
 
 
     def lineReceived(self, line):
-        log.msg('Got serial ', line)
+        id = ord(line[0])
+        state = ord(line[1])
+
+        log.msg("lilypad", id, state)
 
     def resetLilypads(self):
         self.transport.write(chr(0))
