@@ -56,15 +56,13 @@ class CryptoLotus(service.Service):
         except:
             log.msg("Could not initialize WS2801 strips over SPI!")
 
-        try:
-            from twisted.internet.serialport import SerialPort
+    
+        from twisted.internet.serialport import SerialPort
 
-            self.wireless = SerialWireless()
-            self.serial_port = SerialPort(wireless, '/dev/ttyAMA0', reactor, 57600)
-            self.addLilypadProvider(self.wireless)
+        self.wireless = SerialWireless()
+        self.serial_port = SerialPort(wireless, '/dev/ttyAMA0', reactor, 57600)
+        self.addLilypadProvider(self.wireless)
 
-        except:
-            log.msg("Could not initialize Raspbery Pi serial port!")
 
         self.boot_mode = BootMode(self)
         self.attract_mode = AttractMode(self)
