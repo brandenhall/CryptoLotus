@@ -42,7 +42,6 @@ class BootMode:
 
             else:
                 self.lotus.changeMode(self.lotus.attract_mode)
-                self.lotus.resetLilypads()
 
             self.frame += 1
 

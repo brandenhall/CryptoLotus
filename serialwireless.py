@@ -25,8 +25,6 @@ class SerialWireless(LineReceiver):
         self.lotus.lilypads[id].active = active
 
     def resetLilypads(self):
-        time.sleep(1)
-        log.msg("RESET LILYPADS")
         self.transport.write(self.reset_code)
 
     def updateLilypad(self, lilypad):
