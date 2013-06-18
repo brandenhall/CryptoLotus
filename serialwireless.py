@@ -1,6 +1,8 @@
 from twisted.protocols.basic import LineReceiver
 from twisted.python import log
 
+import time
+
 
 class SerialWireless(LineReceiver):
 
@@ -23,6 +25,7 @@ class SerialWireless(LineReceiver):
         self.lotus.lilypads[id].active = active
 
     def resetLilypads(self):
+        time.sleep(1)
         log.msg("RESET LILYPADS")
         self.transport.write(self.reset_code)
 
