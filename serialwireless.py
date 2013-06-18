@@ -28,6 +28,8 @@ class SerialWireless(LineReceiver):
         self.transport.write(self.reset_code)
 
     def updateLilypad(self, lilypad):
+        log.msg("Set lilypad color", lilypad.id, lilypad.color)
+
         red = chr(lilypad.color >> 16 & 0xFF)
         green = chr(lilypad.color >> 8 & 0xFF)
         blue = chr(lilypad.color & 0xFF)
