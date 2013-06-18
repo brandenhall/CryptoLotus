@@ -13,6 +13,8 @@ class SerialWireless(LineReceiver):
 
 
     def lineReceived(self, line):
+        log.msg("SERIAL", line)
+
         id = int(line[0])
         active = line[1] == '1'
 
