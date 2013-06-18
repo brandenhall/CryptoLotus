@@ -15,9 +15,12 @@ from modes import BootMode, AttractMode, LoginMode, PlayMode
 
 from profilehooks import timecall
 
+from time
+
 class CryptoLotus(service.Service):
 
-    def __init__(self):
+    def setup(self):
+
         self.blossom = Blossom(self)
         self.lilypads = []
 
@@ -59,15 +62,12 @@ class CryptoLotus(service.Service):
         self.wireless = None
         self.serial_port = None
 
-        try:
-            from twisted.internet.serialport import SerialPort
+        from twisted.internet.serialport import SerialPort
 
-            self.wireless = SerialWireless(self)
-            self.serial_port = SerialPort(self.wireless, '/dev/ttyAMA0', reactor, 57600)
-            self.addLilypadProvider(self.wireless)
+        self.wireless = SerialWireless(self)
+        self.serial_port = SerialPort(self.wireless, '/dev/ttyAMA0', reactor, 57600)
+        self.addLilypadProvider(self.wireless)
 
-        except:
-            log.msg("Could not initialize RPi serial port!")
 
         self.boot_mode = BootMode(self)
         self.attract_mode = AttractMode(self)
@@ -122,7 +122,10 @@ class CryptoLotus(service.Service):
 application = service.Application("CryptoLotus")
 
 service_collection = service.IServiceCollection(application)
+
 lotus = CryptoLotus()
 lotus.setServiceParent(service_collection)
 
 internet.TCPServer(settings.SIMULATOR_PORT, lotus.getSimulatorFactory()).setServiceParent(service_collection)
+
+lotus.setup()
