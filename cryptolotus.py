@@ -15,7 +15,6 @@ from modes import BootMode, AttractMode, LoginMode, PlayMode
 
 from profilehooks import timecall
 
-from time
 
 class CryptoLotus(service.Service):
 
