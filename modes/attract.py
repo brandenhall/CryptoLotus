@@ -34,6 +34,7 @@ class AttractMode:
         self.attract_count = 0
         self.mode = ATTRACT_MODE
 
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(12, GPIO.OUT)
         GPIO.setup(16, GPIO.OUT)
@@ -55,7 +56,7 @@ class AttractMode:
     def closeLotus(self):
         GPIO.output(12, 0)
         GPIO.output(16, 1)
-        self.blossom_pattern.speed = -1
+        self.blossom_pattern.speed = 1
 
     def showLotus(self):
         GPIO.output(12, 0)
@@ -67,7 +68,7 @@ class AttractMode:
         self.mode = ATTRACT_MODE
         self.front_pattern = self.black
         self.back_pattern = self.black
-        self.frame = 0
+        self.frame = 1
         self.attract_count = -1
 
     def startMode(self):
@@ -100,7 +101,7 @@ class AttractMode:
                 reactor.callLater(settings.BLOSSOM_MOVE_TIME + settings.BLOSSOM_SHOW_TIME, self.closeLotus)
                 reactor.callLater((settings.BLOSSOM_MOVE_TIME * 2) + settings.BLOSSOM_SHOW_TIME, self.hideLotus)
                 self.blossom_pattern = random.choice(self.rewards)
-                self.blossom_pattern.speed = 3
+                self.blossom_pattern.speed = -3
 
 
         elif self.mode == TRANSITION_MODE:
