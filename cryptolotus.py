@@ -115,6 +115,7 @@ class CryptoLotus(service.Service):
    
     def stopService(self):
         service.Service.stopService(self)
+        self.mode.stopMode()
         self.blossom.clear()
         self.loop.stop()
 
