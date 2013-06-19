@@ -2,7 +2,8 @@ import settings
 
 class Black:
 
-    def draw(self):
-        data = [0] * (settings.LEDS * 3)
+    def __init__(self):
+        self.data = [0] * (settings.LEDS * 3)
 
-        return data
+    def draw(self):
+        return self.data
