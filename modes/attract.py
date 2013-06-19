@@ -8,6 +8,8 @@ from os import listdir
 from os.path import isfile, join
 from twisted.python import log
 
+from twisted.internet import reactor
+
 
 from blossom.patterns import SlitScan, Paparazzi, Black
 
@@ -35,6 +37,8 @@ class AttractMode:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(12, GPIO.OUT)
         GPIO.setup(16, GPIO.OUT)
+        GPIO.output(12, 0)
+        GPIO.output(16, 0) 
 
         images = [f for f in listdir(settings.ATTRACT_PATH) if isfile(join(settings.ATTRACT_PATH, f))]
         for image in images:
