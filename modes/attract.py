@@ -97,8 +97,8 @@ class AttractMode:
                 self.mode = BLOSSOM_MODE
                 self.openLotus()
                 reactor.callLater(settings.BLOSSOM_MOVE_TIME, self.showLotus)
-                reactor.callLater(settings.BLOSSOM_MOVE_TIME + settings.BLOSSOM_OPEN_TIME, self.closeLotus)
-                reactor.callLater((settings.BLOSSOM_MOVE_TIME * 2) + settings.BLOSSOM_OPEN_TIME, self.hideLotus)
+                reactor.callLater(settings.BLOSSOM_MOVE_TIME + settings.BLOSSOM_SHOW_TIME, self.closeLotus)
+                reactor.callLater((settings.BLOSSOM_MOVE_TIME * 2) + settings.BLOSSOM_SHOW_TIME, self.hideLotus)
                 self.blossom_pattern = random.choice(self.rewards)
                 self.blossom_pattern.speed = 3
 
