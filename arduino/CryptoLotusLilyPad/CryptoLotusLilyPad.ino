@@ -224,14 +224,11 @@ void checkMessages() {
       // set color 
       } else if (rf12_data[0] == 1) {
         Serial.println("GOT COLOR");
-        // turn LEDs off before making changes
-  //          PORTC &= 0xF0;
-  //          PORTD &= 0x0F;
-          yellow();
-  //      color[0] = rf12_data[1];
-  //      color[1] = rf12_data[2];
-  //      color[2] = rf12_data[3];
-  //      prepareSlots();
+        yellow();
+        color[0] = rf12_data[1];
+        color[1] = rf12_data[2];
+        color[2] = rf12_data[3];
+        prepareSlots();
       }
     }
   }
@@ -272,10 +269,10 @@ void play() {
       }       
     }
     
-//    byte bits = slots[TCNT0];
-    
-//    PORTC = (PORTC & 0xF0) | (bits & 0x0F);
-//    PORTD = (PORTD & 0x0F) | (bits & 0xF0);
+    byte bits = slots[TCNT0];
+  
+    PORTC = (PORTC & 0xF0) | (bits & 0x0F);
+    PORTD = (PORTD & 0x0F) | (bits & 0xF0);
 }
 
 void setup() {
