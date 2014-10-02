@@ -2,10 +2,8 @@
 
 #define BAND RF12_915MHZ // wireless frequency band
 #define GROUP 4     // wireless net group
-#define DEFAULT_NODE_ID 2   // default node id until it's been set
-#define STEP_DELTA 100
-#define SENSOR_POLL_RATE 100
-#define DATA_POLL_RATE 10
+#define SENSOR_POLL_RATE 30
+#define STEP_DELTA 200
 
 // mode pointer
 void (*mode)();
@@ -40,8 +38,8 @@ static void prepareSlots() {
  //       if (intensity == 255) ++intensity;  // change (original) 254 to 256
         // fill in the 1's
         byte mask = masks[i]; // map setting to corresponding I/O pin
-        for (word i = 0; i < intensity; ++i)
-            slots[i] |= mask;
+        for (word j = 0; j < intensity; ++j)
+            slots[j] |= mask;
     }
 }
 
@@ -100,145 +98,45 @@ void black() {
 }
 
 
-
-void waitForLotus(void) {  
-  if (timer.poll(10)) {
-    checkMessages();                         
-  }  
-}
-
-void calibrate(void) {
+// calibrate the off state of the step sensor
+void calibrateUp(void) {
   int total = 0;
   
-  for (byte i=0; i<20; ++i) {
+  for (byte i=0; i<100; ++i) {
     total += analogRead(2);
-    delay(100);
+    delay(30);
   }
   
-  stepThreshold = (int)((total / 20.0)) + STEP_DELTA;
+  stepThreshold = (int)((total / 100.0)) + STEP_DELTA;
   
-  blue();
+  Serial.println(stepThreshold);
   
-  mode = waitForStep;
+  green();
+  
+  mode = calibrateDown;
   
   Serial.println("WAIT FOR STEP");
 }
 
-void waitForStep(void) {  
-  if (timer.poll(10)) {
+void calibrateDown(void) {  
+  if (timer.poll(30)) {
     
     
     if (analogRead(2) > stepThreshold) {
-      byte cmd[1];
-      cmd[0] = 128;
-    
-      green();
+      white();
       
       while (analogRead(2) > stepThreshold) {
-        delay(100);  
+        delay(30);  
       }
       
       black();
       
-      while (!rf12_canSend()) {
-        rf12_recvDone();
-        delay(10);
-      } 
-      
-      rf12_sendStart(RF12_HDR_DST | 1, &cmd, sizeof cmd);
-      rf12_sendWait(0);
-      
-      mode = setupNetwork; 
-      
-      yellow();
-
-    } else if(rf12_recvDone() && rf12_crc == 0 && rf12_hdr == (RF12_HDR_DST | nodeId)) {
-      if (rf12_len == 4 && rf12_data[0] == 0 && rf12_data[1] == 0 && rf12_data[2] == 0 && rf12_data[3] == 0) {
-        black();
-        nodeId = DEFAULT_NODE_ID;
-        rf12_initialize(nodeId, BAND, GROUP);
-        white();
-        mode = calibrate;
-      }     
+      mode = play;
     }
   }
 }
 
-void setupNetwork(void) {
-    if (timer.poll(10) && rf12_recvDone() && rf12_hdr == (RF12_HDR_DST | nodeId) && rf12_crc == 0) {
-      
-      if (rf12_data[0] == 129) {    
-        nodeId = rf12_data[1];
-        Serial.print("NODE ID ");
-        Serial.println(nodeId);    
-        state[0] = 2; // id for state messages
-        state[1] = nodeId;
-        state[2] = 0;
-        active = false;
-        rf12_initialize(nodeId, BAND, GROUP);
-        black();
-        
-        for (int i=0; i < nodeId - 9; ++i) {
-           white();
-           delay(100);
-           black();
-           delay(500);
-        }
-        black();
-        
-        mode = play;
-        
-      } else if (rf12_len == 4 && rf12_data[0] == 0 && rf12_data[1] == 0 && rf12_data[2] == 0 && rf12_data[3] == 0) {
-        black();
-        nodeId = DEFAULT_NODE_ID;
-        rf12_initialize(nodeId, BAND, GROUP);
-        white();
-        mode = calibrate;
-      }     
-    }
-}
-
-void checkMessages() {
-  
-  if (rf12_recvDone()) {
-    Serial.println("GOT MESSAGE");
-    
-    Serial.println(rf12_hdr);
-    Serial.println((RF12_HDR_DST | nodeId));
-    Serial.println("---");
-    
-    if (rf12_hdr == (RF12_HDR_DST | nodeId)
-      && rf12_crc == 0) {
-      
-      Serial.println("GOT MESSAGE");
-      Serial.println(rf12_data[0]);
-      
-      // reset
-      if (rf12_data[0] == 0 && rf12_data[1] == 0 && rf12_data[2] == 0 && rf12_data[3] == 0) {
-        black();
-        nodeId = DEFAULT_NODE_ID;
-        rf12_initialize(nodeId, BAND, GROUP);
-        white();
-        mode = calibrate;        
-        
-      // set color 
-      } else if (rf12_data[0] == 1) {
-        Serial.println("GOT COLOR");
-        yellow();
-        color[0] = rf12_data[1];
-        color[1] = rf12_data[2];
-        color[2] = rf12_data[3];
-        prepareSlots();
-      }
-    }
-  }
-}
-
-void play() {
-    if (timer.poll(DATA_POLL_RATE)) {
-      checkMessages();
-    }  
-  
+void play() {  
     if (timer.poll(SENSOR_POLL_RATE)) {
       
       int sensor = analogRead(2);
@@ -246,38 +144,41 @@ void play() {
       if (!active && sensor > stepThreshold) {
         active = true;
         state[2] = 1;
-        
-        while (!rf12_canSend()) {
-          checkMessages();
-          delay(10);
-        } 
-        
-        rf12_sendStart(RF12_HDR_DST | 1, &state, sizeof state);
-        rf12_sendWait(0);
+        white();
         
       } else if (active && sensor < stepThreshold) {
         active = false;
         state[2] = 0;
         
-        while (!rf12_canSend()) {
-          checkMessages();
-          delay(10);
-        } 
-        
-        rf12_sendStart(RF12_HDR_DST | 1, &state, sizeof state);
-        rf12_sendWait(0);
+        black();
       }       
     }
     
+    if (rf12_recvDone()
+        && rf12_crc == 0
+        && RF12_WANTS_ACK
+        && rf12_len == 3) {
+          
+ //     PORTC &= 0xF0;
+ //     PORTD &= 0x0F;
+
+      if (rf12_data[0] != color[0] || rf12_data[1] != color[1] || rf12_data[2] != color[2]) {
+        memcpy(color, (void*) rf12_data, rf12_len);
+        rf12_sendNow(RF12_ACK_REPLY, &state, sizeof state);
+        prepareSlots();
+      } else {
+        rf12_sendNow(RF12_ACK_REPLY, &state, sizeof state);
+      }
+    }
+    
     byte bits = slots[TCNT0];
-  
     PORTC = (PORTC & 0xF0) | (bits & 0x0F);
     PORTD = (PORTD & 0x0F) | (bits & 0xF0);
 }
 
 void setup() {
   Serial.begin(57600);  
-  Serial.println("Crypto Lotus Lily Pad v1.0");
+  Serial.println("Crypto Lotus Lily Pad v1.1");
 
   // setup the pins
   for (byte i = 0; i < 3; ++i) {
@@ -287,7 +188,32 @@ void setup() {
       DDRD |= masks[i] & 0xF0;        // make pin an output
   }
   
-  nodeId = DEFAULT_NODE_ID;
+  // read the node ID from pins
+  pinMode(6, INPUT);
+  pinMode(7, INPUT);
+  pinMode(17, INPUT);
+  
+  nodeId = (digitalRead(6) | digitalRead(7) << 1 | digitalRead(17) << 2) + 1;
+
+  Serial.print("Node ID: ");
+  Serial.println(nodeId);
+  
+  delay(1000);
+  
+  for (byte i=0; i<nodeId; ++i) {
+     white();
+     delay(500);
+     black();
+     delay(250); 
+  }
+  
+  delay(1000);
+  
+  state[0] = 0;
+  state[1] = nodeId;
+  
+  rf12_initialize(nodeId, BAND, GROUP);
+  
   yellow();
   delay(1000);
   cyan();
@@ -296,7 +222,7 @@ void setup() {
   delay(1000);
   red();
   
-  mode = waitForLotus;
+  mode = calibrateUp;
 }
 
 void loop() {

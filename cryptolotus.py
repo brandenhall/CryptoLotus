@@ -1,19 +1,15 @@
 import settings
-import random
 
 from twisted.application import service, internet
 from twisted.python import log
 from twisted.internet import task, reactor
-from twisted.python.log import ILogObserver, FileLogObserver
-from twisted.python.logfile import DailyLogFile
 
 from simulator import SimulatorFactory
 from lilypad import LilyPad
 from blossom import Blossom
 from serialwireless import SerialWireless
-from modes import BootMode, AttractMode, LoginMode, PlayMode
-
-from profilehooks import timecall
+from modes import BootMode, GeyserMode
+from twisted.internet.serialport import SerialPort
 
 
 class CryptoLotus(service.Service):
@@ -29,26 +25,6 @@ class CryptoLotus(service.Service):
         self.blossom_providers = []
         self.lilypad_providers = []
 
-        # self.normal_modes = []
-        # self.normal_modes.append(ColorWheel(0.005))
-        # self.normal_modes.append(Paparazzi())
-
-        # # normal modes
-        # images = [f for f in listdir(settings.ATTRACT_PATH) if isfile(join(settings.ATTRACT_PATH, f))]
-
-        # for image in images:
-        #     self.normal_modes.append(SlitScan(join(settings.ATTRACT_PATH, image), 1))
-
-        # # reward modes
-        # self.reward_modes = []
-        # images = [f for f in listdir(settings.REWARD_PATH) if isfile(join(settings.REWARD_PATH, f))]
-
-        # for image in images:
-        #     self.reward_modes.append(SlitScan(join(settings.REWARD_PATH, image), 1))
-
-        # self.frame = 0
-        # self.cycle = 0
-
         try:
             from ws2801 import WS2801
 
@@ -61,17 +37,14 @@ class CryptoLotus(service.Service):
         self.wireless = None
         self.serial_port = None
 
-        from twisted.internet.serialport import SerialPort
-
-        # self.wireless = SerialWireless(self)
-        # self.serial_port = SerialPort(self.wireless, '/dev/ttyAMA0', reactor, 57600)
-        # self.addLilypadProvider(self.wireless)
-
+        self.wireless = SerialWireless(self)
+        self.serial_port = SerialPort(self.wireless, settings.SERIAL_PORT, reactor, settings.SERIAL_BAUD)
+        self.addLilypadProvider(self.wireless)
 
         self.boot_mode = BootMode(self)
-        self.attract_mode = AttractMode(self)
-        self.login_mode = LoginMode(self)
-        self.play_mode = PlayMode(self)
+        self.geyser_mode = GeyserMode(self)
+
+        self.current_mode = self.geyser_mode
 
         self.mode = self.boot_mode
         self.mode.startMode()
@@ -112,7 +85,7 @@ class CryptoLotus(service.Service):
     def getSimulatorFactory(self):
         f = SimulatorFactory(self, 'ws://0.0.0.0:%d' % (settings.SIMULATOR_PORT,))
         return f
-   
+
     def stopService(self):
         service.Service.stopService(self)
         self.mode.stopMode()

@@ -7,7 +7,6 @@ import time
 class SerialWireless(LineReceiver):
 
     def __init__(self, lotus):
-        self.reset_code = chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
         self.lotus = lotus
 
     def connectionMade(self):

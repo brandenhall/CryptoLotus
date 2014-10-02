@@ -18,8 +18,9 @@ TRANSITION_MODE = "transition"
 FOREPLAY_MODE = "foreplay"
 BLOSSOM_MODE = "blossom"
 
-class AttractMode:
-    
+
+class GeyserMode:
+
     def __init__(self, lotus):
         self.lotus = lotus
         self.patterns = []
@@ -32,7 +33,7 @@ class AttractMode:
         self.paparazzi = Paparazzi()
         self.black = Black()
         self.attract_count = 0
-        self.mode = ATTRACT_MODE
+        self.mode = FOREPLAY_MODE
 
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
@@ -60,11 +61,11 @@ class AttractMode:
 
     def showLotus(self):
         GPIO.output(12, 0)
-        GPIO.output(16, 0) 
+        GPIO.output(16, 0)
 
     def hideLotus(self):
         GPIO.output(12, 0)
-        GPIO.output(16, 0) 
+        GPIO.output(16, 0)
         self.mode = ATTRACT_MODE
         self.front_pattern = self.black
         self.back_pattern = self.black
@@ -76,7 +77,8 @@ class AttractMode:
             lilypad.setColor(0)
 
         self.lotus.blossom.clear()
-        self.frame = random.randint(settings.MIN_ATTRACT_FRAMES, settings.MAX_ATTRACT_FRAMES)
+        self.frame = settings.FOREPLAY_FRAMES
+
         self.transition = 64
         self.back_pattern = random.choice(self.patterns)
         self.front_pattern = None
@@ -84,7 +86,7 @@ class AttractMode:
 
     def stopMode(self):
         GPIO.output(12, 0)
-        GPIO.output(16, 0) 
+        GPIO.output(16, 0)
 
     def update(self):
         if self.mode == BLOSSOM_MODE:
@@ -97,9 +99,9 @@ class AttractMode:
             if self.frame == 0:
                 self.mode = BLOSSOM_MODE
                 self.openLotus()
-                reactor.callLater(settings.BLOSSOM_MOVE_TIME, self.showLotus)
-                reactor.callLater(settings.BLOSSOM_MOVE_TIME + settings.BLOSSOM_SHOW_TIME, self.closeLotus)
-                reactor.callLater((settings.BLOSSOM_MOVE_TIME * 2) + settings.BLOSSOM_SHOW_TIME, self.hideLotus)
+                reactor.callLater(settings.BLOSSOM_OPEN_TIME, self.showLotus)
+                reactor.callLater(settings.BLOSSOM_OPEN_TIME + settings.BLOSSOM_SHOW_TIME, self.closeLotus)
+                reactor.callLater((settings.BLOSSOM_OPEN_TIME + settings.BLOSSOM_CLOSE_TIME) + settings.BLOSSOM_SHOW_TIME, self.hideLotus)
                 self.blossom_pattern = random.choice(self.rewards)
                 self.blossom_pattern.speed = 2
 
@@ -146,24 +148,23 @@ class AttractMode:
 
                     self.transition = 64
 
-        # make the lilypads spin
-        # if self.lilypad_frame == 0:
-        #     self.lilypad_hue = math.fmod(self.lilypad_hue, 1)
-        #     rgb = colorsys.hsv_to_rgb(self.lilypad_hue, 1, settings.ATTRACT_LILYPAD_BRIGHTNESS)
+#        make the lilypads spin
+        if self.lilypad_frame == 0:
+            self.lilypad_hue = math.fmod(self.lilypad_hue, 1)
+            rgb = colorsys.hsv_to_rgb(self.lilypad_hue, 1, settings.ATTRACT_LILYPAD_BRIGHTNESS)
 
-        #     self.lilypad_hue += settings.ATTRACT_LILYPAD_HUE_STEP
-        #     self.lilypad += 1
-        #     self.lilypad %= settings.LILYPADS
+            self.lilypad_hue += settings.ATTRACT_LILYPAD_HUE_STEP
+            self.lilypad += 1
+            self.lilypad %= settings.LILYPADS
 
+            for i, lilypad in enumerate(self.lotus.lilypads):
+                if i != self.lilypad:
+                    lilypad.setColor(0)
+                else:
+                    lilypad.setColor(int(rgb[0] * 255) << 16 | int(rgb[1] * 255) << 8 | int(rgb[2] * 255))
 
-        #     for i, lilypad in enumerate(self.lotus.lilypads):
-        #         if i != self.lilypad:
-        #             lilypad.setColor(0)
-        #         else:
-        #             lilypad.setColor(int(rgb[0] * 255) << 16 | int(rgb[1] * 255) << 8 | int(rgb[2] * 255))
+        self.lilypad_frame += 1
 
-        # self.lilypad_frame += 1
-
-        # if self.lilypad_frame == settings.ATTRACT_LILYPAD_RATE:
-        #     self.lilypad_frame = 0
+        if self.lilypad_frame == settings.ATTRACT_LILYPAD_RATE:
+            self.lilypad_frame = 0
         

@@ -22,6 +22,9 @@ class BootMode:
             self.lotus.blossom.data = [0,128,128] * settings.LEDS
             self.lotus.resetLilypads()
 
+    def stopMode(self):
+        pass
+
     def update(self):
         if self.lilypads_ready:
 
@@ -41,7 +44,7 @@ class BootMode:
                     lilypad.setColor(255)
 
             else:
-                self.lotus.changeMode(self.lotus.attract_mode)
+                self.lotus.changeMode(self.lotus.current_mode)
 
             self.frame += 1
 
